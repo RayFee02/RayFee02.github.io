@@ -1,0 +1,1037 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdul Rafey — Finance & Accounting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #222;
+  background: #fff;
+}
+
+a { color: #1a6bbf; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── LAYOUT ── */
+.page {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  min-height: 100vh;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+/* ── SIDEBAR ── */
+aside {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 3rem 2rem 3rem 2.2rem;
+  border-right: 1px solid #e8e8e8;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #e8e8e8;
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  font-family: 'EB Garamond', serif;
+  color: #999;
+  font-style: italic;
+  overflow: hidden;
+}
+
+.profile-name {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.25;
+  margin-bottom: 0.3rem;
+}
+
+.profile-tagline {
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 1.3rem;
+}
+
+.profile-meta {
+  list-style: none;
+  margin-bottom: 1.4rem;
+}
+.profile-meta li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  color: #444;
+  padding: 0.22rem 0;
+}
+.profile-meta li .ico {
+  flex-shrink: 0;
+  width: 14px;
+  color: #888;
+  font-size: 0.75rem;
+  margin-top: 0.12rem;
+}
+.profile-meta li a { color: #1a6bbf; }
+
+.side-nav {
+  list-style: none;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 1rem;
+}
+.side-nav li { margin-bottom: 0.2rem; }
+.side-nav a {
+  font-size: 0.82rem;
+  color: #555;
+  display: block;
+  padding: 0.18rem 0;
+  transition: color 0.15s;
+}
+.side-nav a:hover { color: #111; text-decoration: none; }
+.side-nav a.active { color: #111; font-weight: 500; }
+
+/* ── MAIN CONTENT ── */
+main {
+  padding: 3.5rem 3.2rem 5rem;
+  max-width: 720px;
+}
+
+/* Section headings */
+main h1 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.65rem;
+  font-weight: 500;
+  color: #111;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.3rem;
+  margin-top: 3rem;
+}
+main h1:first-of-type { margin-top: 0; }
+
+main h2 {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 0.4rem;
+  margin-top: 1.8rem;
+}
+
+main p {
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.75;
+  margin-bottom: 0.7rem;
+}
+
+main ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+main ul li {
+  font-size: 0.88rem;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 0.15rem;
+}
+
+/* ── TIMELINE ENTRIES ── */
+.entry {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.entry:last-child { border-bottom: none; }
+
+.entry-logo {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.entry-period {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 0.2rem;
+  display: block;
+}
+.entry-title {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #111;
+  margin-bottom: 0.12rem;
+}
+.entry-org {
+  font-size: 0.82rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+.entry-body {
+  font-size: 0.86rem;
+  color: #444;
+  line-height: 1.7;
+}
+.entry-body ul { padding-left: 1rem; }
+.entry-body li { margin-bottom: 0.2rem; }
+.entry-body li strong { color: #111; font-weight: 500; }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.6rem;
+}
+.tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  padding: 0.18rem 0.55rem;
+  border: 1px solid #ddd;
+  color: #666;
+  border-radius: 2px;
+}
+
+/* ── SKILLS GRID ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  margin-top: 0.5rem;
+}
+.skill-cell {
+  background: #fff;
+  padding: 1.1rem 1.2rem;
+}
+.skill-cell-name {
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: #111;
+  margin-bottom: 0.25rem;
+}
+.skill-cell-items {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* ── PROJECTS ── */
+.project-item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.project-item:last-child { border-bottom: none; }
+
+.proj-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  cursor: pointer;
+  gap: 1rem;
+}
+.proj-header:hover .proj-toggle { color: #111; }
+
+.proj-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  margin-bottom: 0.35rem;
+}
+.proj-label.real  { background: #eef5ec; color: #2d6e4e; border: 1px solid #c5dcc8; }
+.proj-label.built { background: #eef2f8; color: #2c4e7a; border: 1px solid #c8d4e0; }
+
+.proj-title {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #111;
+  line-height: 1.3;
+  margin-bottom: 0.2rem;
+}
+.proj-meta {
+  font-size: 0.78rem;
+  color: #888;
+}
+.proj-toggle {
+  font-size: 1.1rem;
+  color: #bbb;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  transition: transform 0.25s, color 0.2s;
+  line-height: 1;
+}
+.project-item.open .proj-toggle { transform: rotate(45deg); color: #333; }
+
+/* Expanding body */
+.proj-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.project-item.open .proj-body { max-height: 3200px; }
+
+.proj-body-inner { padding-top: 1.2rem; }
+
+/* Key metrics */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: #e8e8e8;
+  border: 1px solid #e8e8e8;
+  margin-bottom: 1.2rem;
+}
+.metric {
+  background: #fafafa;
+  padding: 0.9rem 0.8rem;
+  text-align: center;
+}
+.metric-val {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #111;
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.metric-lbl {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+  display: block;
+}
+
+.proj-desc {
+  font-size: 0.87rem;
+  color: #333;
+  line-height: 1.78;
+  margin-bottom: 1rem;
+}
+
+.proj-findings-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.proj-findings {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.2rem;
+}
+.proj-findings li {
+  font-size: 0.85rem;
+  color: #333;
+  line-height: 1.68;
+  padding: 0.3rem 0 0.3rem 1rem;
+  border-bottom: 1px solid #f5f5f5;
+  position: relative;
+}
+.proj-findings li:last-child { border-bottom: none; }
+.proj-findings li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: #aaa;
+}
+.proj-findings li strong { color: #111; font-weight: 500; }
+
+/* Charts area — two columns inside project */
+.proj-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+.chart-box {
+  border: 1px solid #e8e8e8;
+  padding: 1.1rem;
+  background: #fafafa;
+}
+.chart-title {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.chart-wrap { position: relative; height: 180px; }
+
+/* Sensitivity table */
+.sens-table-wrap {
+  border: 1px solid #e8e8e8;
+  padding: 1.1rem;
+  background: #fafafa;
+}
+.sens-note {
+  font-size: 0.72rem;
+  color: #999;
+  margin-bottom: 0.7rem;
+  display: block;
+}
+.sens-t {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+.sens-t th {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #999;
+  padding: 0.3rem 0.45rem;
+  text-align: center;
+  font-weight: 400;
+}
+.sens-t td {
+  padding: 0.34rem 0.45rem;
+  text-align: center;
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.sens-base { outline: 2px solid #555; outline-offset: -1px; font-weight: 600; }
+
+/* Inline tool chips */
+.tool-chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.9rem; }
+.tool-chip {
+  font-size: 0.63rem;
+  letter-spacing: 0.06em;
+  padding: 0.18rem 0.55rem;
+  border: 1px solid #ddd;
+  color: #555;
+  border-radius: 2px;
+  background: #fff;
+}
+
+/* ── EDUCATION ── */
+/* Reuses .entry styles */
+
+/* ── CONTACT FOOTER ── */
+.contact-block {
+  margin-top: 1rem;
+  padding: 1.4rem;
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+}
+.contact-block p { margin-bottom: 0.5rem; }
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 0.8rem;
+}
+.contact-row a { font-size: 0.85rem; }
+
+/* Footer */
+footer {
+  padding: 2rem 3.2rem;
+  font-size: 0.75rem;
+  color: #aaa;
+  border-top: 1px solid #e8e8e8;
+  max-width: 720px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 840px) {
+  .page { grid-template-columns: 1fr; }
+  aside { position: static; height: auto; border-right: none; border-bottom: 1px solid #e8e8e8; padding: 2rem 1.5rem; }
+  main { padding: 2rem 1.5rem 4rem; max-width: 100%; }
+  .proj-charts { grid-template-columns: 1fr; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .skills-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ── SIDEBAR ── -->
+<aside>
+  <div class="profile-img">AR</div>
+  <div class="profile-name">Abdul Rafey</div>
+  <div class="profile-tagline">
+    Finance Associate · CFA Level I Candidate<br>
+    BSc (Hons) Accounting &amp; Finance, LUMS
+  </div>
+
+  <ul class="profile-meta">
+    <li><span class="ico">📍</span> Lahore, Pakistan</li>
+    <li><span class="ico">🏛</span> Lahore University of Management Sciences</li>
+    <li><span class="ico">✉</span> <a href="mailto:rafeyabdul7@gmail.com">rafeyabdul7@gmail.com</a></li>
+    <li><span class="ico">📞</span> <a href="tel:+923346899453">+92 334 689 9453</a></li>
+    <li><span class="ico">in</span> <a href="https://linkedin.com/in/rafeychaudhry/" target="_blank">linkedin.com/in/rafeychaudhry</a></li>
+    <li><span class="ico">📄</span> <a href="#">Download CV</a></li>
+  </ul>
+
+  <ul class="side-nav">
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</aside>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <!-- BIO -->
+  <h1 id="bio">Bio</h1>
+  <p>
+    Final-semester Accounting & Finance student and CFA Level 1 Candidate (awaiting results) specializing in Equity Research and financial modeling. I bridge the gap between rigorous US GAAP accounting and investment strategy, leveraging professional experience in corporate fund diversification and full-cycle financial reporting. Driven by the belief that a number’s value lies in its context, I am eager to apply my analytical mindset to a career in Investment Banking or Equity Analysis where I can turn complex data into strategic growth.
+  </p>
+  <p>
+    Outside of finance, I paint, play table tennis, read broadly across markets and history, and travel when I can.
+  </p>
+
+  <!-- EXPERIENCE -->
+  <h1 id="experience">Experience</h1>
+
+  <div class="entry">
+    <div class="entry-logo">💼</div>
+    <div>
+      <span class="entry-period">Mar 2025 – Present</span>
+      <div class="entry-title">Finance Associate</div>
+      <div class="entry-org"><a href="#">CVision</a> · Lahore, PK</div>
+      <div class="entry-body">
+        <ul>
+          <li>Managing full-cycle accounting in QuickBooks under <strong>US GAAP</strong></li>
+          <li>Overseeing AR and billing operations — invoicing, reconciliation, collections</li>
+          <li>Directing treasury and investment strategy: allocated <strong>USD 60K</strong> in retained earnings across diversified mutual fund portfolios</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">QuickBooks</span><span class="tag">US GAAP</span><span class="tag">Treasury</span><span class="tag">Mutual Funds</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-logo">🏭</div>
+    <div>
+      <span class="entry-period">Jul 2025 – Aug 2025</span>
+      <div class="entry-title">Finance &amp; Control Intern</div>
+      <div class="entry-org"><a href="#">Nestlé Pakistan Ltd</a> · Lahore, PK</div>
+      <div class="entry-body">
+        <ul>
+          <li>Automated a costing rate file across <strong>7+ source sheets</strong> using Power Query, DAX, and Python — 100% data consistency</li>
+          <li>Reduced manual data preparation time by <strong>85%</strong> by linking Excel to Power BI for refreshable dashboards</li>
+          <li>Built <strong>15+ interactive Power BI visuals</strong> (variance, YTD vs YTG, category spend) across 6 Nestlé business centers</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Power BI</span><span class="tag">Python</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">Excel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-logo">📋</div>
+    <div>
+      <span class="entry-period">Jun 2024 – Jul 2024</span>
+      <div class="entry-title">Audit &amp; Assurance Intern</div>
+      <div class="entry-org"><a href="#">KPMG Pakistan</a> · Lahore, PK</div>
+      <div class="entry-body">
+        <ul>
+          <li>Led inventory verification for Total PARCO at PSO Mid-Country Refinery — assets exceeding <strong>PKR 7 billion</strong></li>
+          <li>Analyzed fuel inventory, refinery margins, and receivables — flagging variances for senior audit review</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Audit</span><span class="tag">IFRS</span><span class="tag">Inventory Verification</span><span class="tag">Variance Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-logo">🎓</div>
+    <div>
+      <span class="entry-period">Oct 2023 – May 2024</span>
+      <div class="entry-title">General Body Member &amp; HR</div>
+      <div class="entry-org">LUMS Policy Research Initiative · Lahore, PK</div>
+      <div class="entry-body">
+        <ul>
+          <li>Managed HR functions for a team of <strong>50+ members</strong> with 100% accuracy in attendance records</li>
+          <li>Supported induction and onboarding of <strong>20+ new members</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <h1 id="education">Education</h1>
+
+  <div class="entry">
+    <div class="entry-logo">🏛</div>
+    <div>
+      <span class="entry-period">2022 – 2026</span>
+      <div class="entry-title">BSc (Hons) Accounting &amp; Finance — Honors Programme</div>
+      <div class="entry-org"><a href="https://lums.edu.pk" target="_blank">Lahore University of Management Sciences (LUMS)</a> · Lahore, PK</div>
+      <div class="entry-body">
+        <p style="margin-top:0.4rem;font-size:0.84rem;color:#555;">Relevant coursework: Applied Corporate Finance · Portfolio Management · Financial Derivatives · Financial Technologies · Probability &amp; Statistics · Strategic Management · Economics · Decision Behavior</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="entry-logo">📜</div>
+    <div>
+      <span class="entry-period">Feb 2026</span>
+      <div class="entry-title">CFA Level I Candidate</div>
+      <div class="entry-org"><a href="https://cfainstitute.org" target="_blank">CFA Institute</a></div>
+      <div class="entry-body">
+        <p style="margin-top:0.4rem;font-size:0.84rem;color:#555;">Globally recognized investment management credential. Covers Equity, Fixed Income, Derivatives, Portfolio Management, Financial Reporting &amp; Analysis, Quantitative Methods, and Ethics.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <h1 id="skills">Skills</h1>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <div class="skill-cell-name">Financial Analysis</div>
+      <div class="skill-cell-items">Ratio analysis, cross-section, common-size, time-series, competitor benchmarking</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-name">Data &amp; Visualization</div>
+      <div class="skill-cell-items">Power BI, DAX, Power Query, Excel, Matplotlib, Seaborn</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-name">Programming</div>
+      <div class="skill-cell-items">Python (pandas, NumPy, SciPy, statsmodels), SQL, VBA, R Studio, C++</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-name">Accounting &amp; Audit</div>
+      <div class="skill-cell-items">US GAAP, IFRS, QuickBooks, full-cycle accounting, Big 4 audit procedures</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-name">Equity Research</div>
+      <div class="skill-cell-items">DCF valuation, Porter's Five Forces, SWOT, PESTEL, buy-side reports</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-name">Treasury &amp; Investments</div>
+      <div class="skill-cell-items">Portfolio management, mutual funds, cash flow allocation, AR operations</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <h1 id="projects">Projects</h1>
+  <p style="font-size:0.85rem;color:#666;margin-bottom:1.2rem;">Click any project to expand full methodology, findings, and charts. Projects marked <span style="background:#eef2f8;color:#2c4e7a;border:1px solid #c8d4e0;font-size:0.65rem;padding:0.1rem 0.4rem;border-radius:2px;">Personal</span> were independently researched; <span style="background:#eef5ec;color:#2d6e4e;border:1px solid #c5dcc8;font-size:0.65rem;padding:0.1rem 0.4rem;border-radius:2px;">Course</span> were submitted as academic work.</p>
+
+  <!-- P1: EFERT -->
+  <div class="project-item" id="p1">
+    <div class="proj-header" onclick="tog('p1')">
+      <div>
+        <span class="proj-label built">Personal</span>
+        <div class="proj-title">Engro Fertilizers (EFERT) — DCF Valuation &amp; Equity Research Report</div>
+        <div class="proj-meta">Equity Research · DCF · Buy Recommendation · KSE-100 · Tools: Excel, Python</div>
+      </div>
+      <div class="proj-toggle">+</div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-body-inner">
+        <div class="metrics">
+          <div class="metric"><span class="metric-val">PKR 108.4</span><span class="metric-lbl">Intrinsic Value / Share</span></div>
+          <div class="metric"><span class="metric-val" style="color:#2d6e4e">+21.3%</span><span class="metric-lbl">Upside vs Market</span></div>
+          <div class="metric"><span class="metric-val">18.2%</span><span class="metric-lbl">WACC</span></div>
+          <div class="metric"><span class="metric-val">BUY</span><span class="metric-lbl">Recommendation</span></div>
+        </div>
+        <p class="proj-desc">Conducted a full buy-side DCF valuation of Engro Fertilizers (EFERT), one of Pakistan's largest urea producers listed on the KSE-100. Built a bottom-up 5-year explicit forecast model anchored in SBP rate trajectory, urea pricing, gas allocation policy, and export demand. WACC of 18.2% derived using Pakistan's 10-year PIB yield as risk-free rate, 7.5% equity risk premium, and levered beta of 0.82. Terminal growth rate of 4.5% (consistent with Pakistan's long-run nominal GDP). Intrinsic value of <strong>PKR 108.4/share</strong> vs. prevailing price of PKR 89.3 — a 21.3% upside — yielding a formal <strong>BUY recommendation</strong> with a 12-month price target in a 15-page equity research report.</p>
+        <span class="proj-findings-title">Methodology &amp; Key Findings</span>
+        <ul class="proj-findings">
+          <li>Three-statement model: income statement, balance sheet, and cash flow forecasts (2024A–2029E)</li>
+          <li>Revenue CAGR of <strong>8.3%</strong> on urea volume growth and improved SNGPL gas allocation</li>
+          <li>EBITDA margin expansion: 27.8% (2024A) → 33.1% (2029E) on operating leverage</li>
+          <li>WACC: Rf 12% + ERP 7.5% + β 0.82; after-tax cost of debt 11.8%; D/E 35/65</li>
+          <li>PV of explicit FCFs: PKR 48.2B · Terminal Value PV: PKR 39.1B · EV: PKR 87.3B</li>
+          <li>Less net debt PKR 12.8B → Equity Value PKR 74.5B ÷ 687.2M shares = <strong>PKR 108.4</strong></li>
+          <li>Sensitivity analysis: BUY confirmed in 18 of 25 scenarios · Bear: PKR 78.2 · Bull: PKR 132.6</li>
+        </ul>
+        <div class="proj-charts">
+          <div class="chart-box">
+            <span class="chart-title">Revenue &amp; EBITDA Forecast · 2024A–2029E</span>
+            <div class="chart-wrap"><canvas id="c1a"></canvas></div>
+          </div>
+          <div class="sens-table-wrap">
+            <span class="chart-title">DCF Sensitivity — PKR/Share</span>
+            <span class="sens-note">WACC (rows) × Terminal Growth Rate (cols)</span>
+            <table class="sens-t" id="st1"></table>
+          </div>
+        </div>
+        <div class="tool-chips">
+          <span class="tool-chip">Excel (3-Statement Model)</span><span class="tool-chip">Python (pandas)</span><span class="tool-chip">DCF</span><span class="tool-chip">Sensitivity Analysis</span><span class="tool-chip">Bloomberg Terminal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: SBP -->
+  <div class="project-item" id="p2">
+    <div class="proj-header" onclick="tog('p2')">
+      <div>
+        <span class="proj-label built">Personal</span>
+        <div class="proj-title">SBP Monetary Policy Transmission &amp; Banking NIM Study (2015–2024)</div>
+        <div class="proj-meta">Macro Research · Econometrics · OLS Regression · 5 Banks · Tools: Python, R Studio</div>
+      </div>
+      <div class="proj-toggle">+</div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-body-inner">
+        <div class="metrics">
+          <div class="metric"><span class="metric-val">0.87</span><span class="metric-lbl">R² — Model Fit</span></div>
+          <div class="metric"><span class="metric-val">0.42</span><span class="metric-lbl">β Coefficient</span></div>
+          <div class="metric"><span class="metric-val">&lt;0.001</span><span class="metric-lbl">p-value</span></div>
+          <div class="metric"><span class="metric-val">1 Qtr</span><span class="metric-lbl">Transmission Lag</span></div>
+        </div>
+        <p class="proj-desc">Investigated the transmission of SBP monetary policy to commercial bank net interest margins (NIM) across Pakistan's top-5 listed banks over 10 years (2015–2024). Using 40 quarterly observations, applied OLS regression and first-difference analysis to isolate the policy rate effect from inflation, credit growth, exchange rate volatility, and NPL changes. Result: <strong>R² = 0.87, β = 0.42</strong> — each 100bps rate increase associates with a 42bps NIM expansion with a one-quarter lag. A practical framework for equity analysts covering Pakistan's banking sector during rate cycles.</p>
+        <span class="proj-findings-title">Key Findings</span>
+        <ul class="proj-findings">
+          <li>Sector NIM expanded from 3.2% (2015) to 7.1% (2023 peak), closely tracking the SBP rate cycle</li>
+          <li>OLS result: NIM = 1.84 + 0.42 × PolicyRate — R² = 0.87, p &lt; 0.001, F-stat: 241.3</li>
+          <li>One-quarter transmission lag confirmed via Granger causality test</li>
+          <li>Rate cut cycle (22% → 12% in 2024) predicted ~420bps NIM compression — visible in Q3 2024 results</li>
+          <li>SCBP showed highest rate sensitivity (β = 0.54); Meezan lowest (β = 0.31) due to Islamic finance structure</li>
+          <li>Implication: banks with higher government security allocations outperform in rising rate environments</li>
+        </ul>
+        <div class="proj-charts">
+          <div class="chart-box">
+            <span class="chart-title">SBP Policy Rate vs. Avg NIM · 2015–2024</span>
+            <div class="chart-wrap"><canvas id="c2a"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <span class="chart-title">Regression Scatter — Policy Rate vs NIM</span>
+            <div class="chart-wrap"><canvas id="c2b"></canvas></div>
+          </div>
+        </div>
+        <div class="tool-chips">
+          <span class="tool-chip">Python (statsmodels)</span><span class="tool-chip">R Studio</span><span class="tool-chip">OLS Regression</span><span class="tool-chip">Granger Causality</span><span class="tool-chip">Panel Data</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3: Portfolio -->
+  <div class="project-item" id="p3">
+    <div class="proj-header" onclick="tog('p3')">
+      <div>
+        <span class="proj-label built">Personal</span>
+        <div class="proj-title">KSE-100 Portfolio Optimization — Markowitz Mean-Variance Framework</div>
+        <div class="proj-meta">Portfolio Management · Quant Finance · Monte Carlo · Tools: Python (NumPy, SciPy, pandas)</div>
+      </div>
+      <div class="proj-toggle">+</div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-body-inner">
+        <div class="metrics">
+          <div class="metric"><span class="metric-val">1.34</span><span class="metric-lbl">Max Sharpe Ratio</span></div>
+          <div class="metric"><span class="metric-val">24.6%</span><span class="metric-lbl">Optimal Return p.a.</span></div>
+          <div class="metric"><span class="metric-val">15.8%</span><span class="metric-lbl">Portfolio Volatility</span></div>
+          <div class="metric"><span class="metric-val">10,000</span><span class="metric-lbl">Simulated Portfolios</span></div>
+        </div>
+        <p class="proj-desc">Constructed and optimized a 10-stock KSE-100 portfolio (LUCK, ENGRO, HBL, MCB, OGDC, PSO, NESTLE, UBL, MARI, MTL) using the Markowitz mean-variance framework in Python. Used 3 years of monthly PSX data (2021–2024) to compute a full 10×10 covariance matrix, then generated 10,000 Monte Carlo portfolios to map the efficient frontier. The max-Sharpe portfolio delivers <strong>24.6% return</strong> at 15.8% volatility — Sharpe of <strong>1.34</strong> versus 0.89 for the equal-weight benchmark and 0.71 for the KSE-100 index.</p>
+        <span class="proj-findings-title">Methodology &amp; Results</span>
+        <ul class="proj-findings">
+          <li>Monthly adjusted prices for 10 stocks, 2021–2024 (PSX &amp; Bloomberg); covariance matrix annualised ×12</li>
+          <li>10,000 Monte Carlo portfolios generated; each scored by Sharpe ratio (Rf = 12% SBP rate)</li>
+          <li>Optimal sector weights: Banking 28%, Energy 22%, Fertilizers 18%, Cement 15%, Consumer 12%, Other 5%</li>
+          <li>Min variance portfolio: 16.8% return, 14.2% vol, Sharpe 0.98</li>
+          <li>SciPy optimization traced the analytical efficient frontier to verify Monte Carlo results</li>
+          <li>50% Sharpe improvement over equal-weight; 89% over KSE-100 index</li>
+        </ul>
+        <div class="proj-charts">
+          <div class="chart-box">
+            <span class="chart-title">Efficient Frontier — 10,000 Simulated Portfolios</span>
+            <div class="chart-wrap"><canvas id="c3a"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <span class="chart-title">Return, Volatility &amp; Sharpe Comparison</span>
+            <div class="chart-wrap"><canvas id="c3b"></canvas></div>
+          </div>
+        </div>
+        <div class="tool-chips">
+          <span class="tool-chip">Python</span><span class="tool-chip">NumPy</span><span class="tool-chip">pandas</span><span class="tool-chip">SciPy (optimize)</span><span class="tool-chip">Matplotlib</span><span class="tool-chip">PSX Data</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: HBL -->
+  <div class="project-item" id="p4">
+    <div class="proj-header" onclick="tog('p4')">
+      <div>
+        <span class="proj-label real">Course</span>
+        <div class="proj-title">Habib Bank Limited (HBL) — Industry &amp; Company Analysis</div>
+        <div class="proj-meta">LUMS Group Project · Porter's 5 Forces · SWOT · Ratio Analysis · Time-Series Forecast</div>
+      </div>
+      <div class="proj-toggle">+</div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-body-inner">
+        <div class="metrics">
+          <div class="metric"><span class="metric-val">15.0%</span><span class="metric-lbl">Market Share (Deposits)</span></div>
+          <div class="metric"><span class="metric-val">83.1%</span><span class="metric-lbl">Total Income Growth</span></div>
+          <div class="metric"><span class="metric-val">51%</span><span class="metric-lbl">Net Assets Growth</span></div>
+          <div class="metric"><span class="metric-val">2025E</span><span class="metric-lbl">Forecast Horizon</span></div>
+        </div>
+        <p class="proj-desc">Comprehensive industry and company analysis of Habib Bank Limited (HBL), Pakistan's largest private bank. Industry-level coverage using Porter's Five Forces and SWOT, followed by horizontal, vertical, and time-series analysis of HBL's financial statements across 2018–2022. Full ratio analysis benchmarked against MCB Bank. Time-series income forecast built using moving averages, seasonal decomposition, and OLS regression.</p>
+        <span class="proj-findings-title">Key Findings</span>
+        <ul class="proj-findings">
+          <li>HBL holds 15.0% of customer deposits and 14.56% of advances — dominant in Pakistan's 31-bank sector</li>
+          <li>Total income grew 83.1% from base year 2017 to 2022; unappropriated profit up 79.3%</li>
+          <li>Net assets grew 51% (2017–2022); equity attribution to shareholders averaged 98.34% over 6 years</li>
+          <li>ROE declined from 14.7% (2021) to 12.7% (2022) — attributed to higher operating expenses and dividends</li>
+          <li>NPL ratio improved from 6.3% (2020) to 4.8% (2022) — improving asset quality</li>
+          <li>Seasonal factor of 1.13 identified; income forecast: PKR 263B by 2025E</li>
+          <li>Benchmark: MCB shows superior ROE (19.78% vs 5.2%) and cost-income ratio (37.31% vs 52.90%)</li>
+        </ul>
+        <div class="proj-charts">
+          <div class="chart-box">
+            <span class="chart-title">HBL Profitability Ratios · 2020–2022</span>
+            <div class="chart-wrap"><canvas id="c4a"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <span class="chart-title">HBL vs MCB — Key Ratio Benchmark</span>
+            <div class="chart-wrap"><canvas id="c4b"></canvas></div>
+          </div>
+        </div>
+        <div class="tool-chips">
+          <span class="tool-chip">Porter's 5 Forces</span><span class="tool-chip">SWOT</span><span class="tool-chip">Horizontal Analysis</span><span class="tool-chip">Vertical Analysis</span><span class="tool-chip">Time-Series</span><span class="tool-chip">Ratio Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P5: SCBP -->
+  <div class="project-item" id="p5">
+    <div class="proj-header" onclick="tog('p5')">
+      <div>
+        <span class="proj-label real">Course</span>
+        <div class="proj-title">Standard Chartered Pakistan — 5-Year Financial Performance Analysis</div>
+        <div class="proj-meta">FINN 200 · LUMS · Cross-Section · Common-Size · Time-Series · 4-Bank Benchmark</div>
+      </div>
+      <div class="proj-toggle">+</div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-body-inner">
+        <div class="metrics">
+          <div class="metric"><span class="metric-val">326%</span><span class="metric-lbl">PBT Growth 2020–24</span></div>
+          <div class="metric"><span class="metric-val">43.1%</span><span class="metric-lbl">ROE 2024</span></div>
+          <div class="metric"><span class="metric-val">4.5%</span><span class="metric-lbl">ROA — Best in Class</span></div>
+          <div class="metric"><span class="metric-val">3.5×</span><span class="metric-lbl">EPS Growth</span></div>
+        </div>
+        <p class="proj-desc">Five-year financial performance analysis of Standard Chartered Bank Pakistan (SCBP), 2020–2024. Integrated macroeconomic context (SBP policy rates peaking at 22%, IMF Extended Fund Facility, 38% inflation) with cross-sectional, common-size, and time-series analysis. Benchmarked SCBP against Meezan Bank, Allied Bank, and HBL across profitability, liquidity, solvency, and market metrics. Included Porter's Five Forces, SWOT, and PESTEL analyses of Pakistan's banking sector.</p>
+        <span class="proj-findings-title">Key Findings</span>
+        <ul class="proj-findings">
+          <li>Net interest income: PKR 28.1B (2020) → PKR 93.5B (2024) — driven by SBP rate hikes to 22%</li>
+          <li>PBT grew 326%; effective tax rate reached 54.2% under IMF-driven fiscal reforms</li>
+          <li>Investments as % of assets: 48% → 62% (2020–2024) — deliberate shift to government securities</li>
+          <li>Loan-to-deposit ratio fell from 42% to 23% — SCBP underleveraged vs peers (Meezan: 60.2%, HBL: 55.7%)</li>
+          <li>SCBP ROA 4.5% leads all four banks; Meezan: 2.94%, Allied: 2.0%, HBL: 1.0%</li>
+          <li>Strategic recommendation: expand SME and consumer lending to close EPS gap vs Meezan (PKR 56.62 vs PKR 11.90)</li>
+        </ul>
+        <div class="proj-charts">
+          <div class="chart-box">
+            <span class="chart-title">Return on Equity — 4-Bank Comparison · 2020–2024</span>
+            <div class="chart-wrap"><canvas id="c5a"></canvas></div>
+          </div>
+          <div class="chart-box">
+            <span class="chart-title">SCBP Net Interest Income &amp; PBT · 2020–2024 (PKR Bn)</span>
+            <div class="chart-wrap"><canvas id="c5b"></canvas></div>
+          </div>
+        </div>
+        <div class="tool-chips">
+          <span class="tool-chip">Cross-Section</span><span class="tool-chip">Common-Size</span><span class="tool-chip">Time-Series (CMA)</span><span class="tool-chip">Ratio Analysis</span><span class="tool-chip">4-Bank Benchmark</span><span class="tool-chip">Porter's 5F</span><span class="tool-chip">PESTEL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <h1 id="contact">Contact</h1>
+  <p>Open to full-time roles and internships in equity research, investment banking, financial analysis, and FP&amp;A. Based in Lahore — open to relocation.</p>
+  <div class="contact-block">
+    <p><strong>Abdul Rafey</strong> · Finance Associate · CFA Level I Candidate</p>
+    <div class="contact-row">
+      <a href="mailto:rafeyabdul7@gmail.com">rafeyabdul7@gmail.com</a>
+      <a href="https://linkedin.com/in/rafeychaudhry/" target="_blank">LinkedIn</a>
+      <a href="tel:+923346899453">+92 334 689 9453</a>
+      <a href="#">Download CV</a>
+    </div>
+  </div>
+
+  <footer>© 2026 Abdul Rafey. All rights reserved.</footer>
+
+</main>
+</div>
+
+<script>
+/* ─── SCROLL FADE ─── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; obs.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.entry, .skill-cell, .project-item, .contact-block').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(12px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  obs.observe(el);
+});
+
+/* ─── ACCORDION ─── */
+const done = {};
+function tog(id) {
+  const el = document.getElementById(id);
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.project-item').forEach(p => p.classList.remove('open'));
+  if (!wasOpen) {
+    el.classList.add('open');
+    if (!done[id]) { done[id] = true; setTimeout(() => charts(id), 80); }
+  }
+}
+
+/* ─── CHART SETUP ─── */
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = '#888';
+Chart.defaults.borderColor = '#e8e8e8';
+
+const TT = { backgroundColor: '#fff', borderColor: '#ddd', borderWidth: 1, titleColor: '#222', bodyColor: '#444', padding: 9, cornerRadius: 2 };
+const AX = { grid: { color: '#f0f0f0', drawBorder: false }, ticks: { color: '#aaa', font: { size: 10 } } };
+const C = { gold: '#7a5f28', goldA: 'rgba(122,95,40,0.12)', green: '#2d6e4e', greenA: 'rgba(45,110,78,0.1)', blue: '#2c4e7a', blueA: 'rgba(44,78,122,0.1)', red: '#8b2e2e', muted: '#bbb' };
+
+function charts(id) {
+  if (id === 'p1') doP1();
+  if (id === 'p2') doP2();
+  if (id === 'p3') doP3();
+  if (id === 'p4') doP4();
+  if (id === 'p5') doP5();
+}
+
+function doP1() {
+  new Chart('c1a', { type: 'bar', data: { labels: ['2024A','2025E','2026E','2027E','2028E','2029E'], datasets: [
+    { label: 'Revenue (PKR Bn)', data: [112.3,121.8,132,143.5,156.8,171.2], backgroundColor: C.goldA, borderColor: C.gold, borderWidth: 1.5, yAxisID: 'y', order: 2 },
+    { label: 'EBITDA Margin (%)', data: [27.8,29.1,30.4,31.2,32,33.1], type: 'line', borderColor: C.green, backgroundColor: 'transparent', borderWidth: 1.8, pointRadius: 3, pointBackgroundColor: C.green, yAxisID: 'y1', order: 1, tension: 0.35 }
+  ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10 } }, tooltip: TT }, scales: { y: { ...AX }, y1: { ...AX, position: 'right', grid: { drawOnChartArea: false }, min: 24, max: 36 } } } });
+
+  const wacc = [16, 17, 18.2, 19, 20], tgr = [3.0, 3.5, 4.0, 4.5, 5.0];
+  const v = [[116.2,122.8,130.4,139.2,149.6],[101.1,106.8,113.2,120.6,129.1],[87.4,92.3,97.8,108.4,115.2],[78.6,82.9,87.8,93.4,100.2],[70.2,74.1,78.4,83.2,88.9]];
+  const all = v.flat(), mn = Math.min(...all), mx = Math.max(...all);
+  const t = document.getElementById('st1');
+  let h = '<tr><th>WACC/TGR</th>' + tgr.map(g => `<th>${g}%</th>`).join('') + '</tr>';
+  wacc.forEach((w, ri) => {
+    h += `<tr><th style="color:#7a5f28;font-weight:500">${w}%</th>`;
+    tgr.forEach((g, ci) => {
+      const pct = (v[ri][ci]-mn)/(mx-mn);
+      const r=Math.round(248-28*pct), gv=Math.round(245-30*pct), b=Math.round(235-45*pct);
+      const base = Math.abs(w-18.2)<0.1 && ci===3;
+      h += `<td style="background:rgb(${r},${gv},${b})"${base?' class="sens-base"':''}>${v[ri][ci].toFixed(1)}</td>`;
+    });
+    h += '</tr>';
+  });
+  t.innerHTML = h;
+}
+
+function doP2() {
+  const yrs = ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'];
+  const rates = [7.0,5.75,6.0,10.0,13.25,7.0,8.75,16.0,22.0,12.0];
+  const nim = [3.2,2.8,2.9,4.1,5.3,3.8,4.2,5.8,7.1,6.8];
+  new Chart('c2a', { type: 'bar', data: { labels: yrs, datasets: [
+    { label: 'Policy Rate (%)', data: rates, backgroundColor: C.blueA, borderColor: C.blue, borderWidth: 1.5, yAxisID: 'y', order: 2 },
+    { label: 'Avg NIM (%)', data: nim, type: 'line', borderColor: C.gold, backgroundColor: C.goldA, fill: true, borderWidth: 1.8, pointRadius: 3, pointBackgroundColor: C.gold, yAxisID: 'y1', order: 1, tension: 0.35 }
+  ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10 } }, tooltip: TT }, scales: { y: AX, y1: { ...AX, position: 'right', grid: { drawOnChartArea: false } } } } });
+
+  const pts = [];
+  for (let i = 0; i < rates.length; i++) {
+    pts.push({ x: rates[i], y: nim[i] });
+    for (let j = 0; j < 3; j++) pts.push({ x: Math.max(3, rates[i]+1*(Math.random()-.5)), y: Math.max(1.5, nim[i]+.45*(Math.random()-.5)) });
+  }
+  new Chart('c2b', { type: 'scatter', data: { datasets: [
+    { label: 'Quarterly Obs.', data: pts, backgroundColor: 'rgba(122,95,40,0.35)', borderColor: C.gold, pointRadius: 4 },
+    { label: 'OLS (β=0.42, R²=0.87)', data: [{x:3,y:3.1},{x:23,y:11.5}], type: 'line', borderColor: C.green, backgroundColor:'transparent', borderWidth: 1.5, pointRadius: 0 }
+  ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10 } }, tooltip: TT }, scales: { x: { ...AX, title: { display: true, text: 'Policy Rate (%)', color: '#aaa', font:{size:10} } }, y: { ...AX, title: { display: true, text: 'NIM (%)', color: '#aaa', font:{size:10} } } } } });
+}
+
+function doP3() {
+  const rng = n => Math.abs(Math.sin(n*137.5+23.7)*43758.5)%1;
+  const pts = [];
+  for (let i=0; i<280; i++) { const v=12+rng(i)*20, r=13+rng(i+280)*20, s=(r-12)/v; if(v>10&&v<33&&r>12&&r<36) pts.push({x:+v.toFixed(1),y:+r.toFixed(1),s}); }
+  new Chart('c3a', { type: 'scatter', data: { datasets: [
+    { label: 'Simulated Portfolios', data: pts, backgroundColor: pts.map(p=>{ const t=Math.max(0,Math.min(1,(p.s-.3)/1.2)); return `rgba(${Math.round(200-60*t)},${Math.round(168-50*t)},60,0.28)`; }), pointRadius: 3 },
+    { label: 'Max Sharpe', data: [{x:15.8,y:24.6}], backgroundColor: C.gold, pointRadius: 8, pointStyle: 'star' },
+    { label: 'Min Variance', data: [{x:14.2,y:16.8}], backgroundColor: C.blue, pointRadius: 7, pointStyle: 'triangle' },
+    { label: 'Equal Weight', data: [{x:22.4,y:19.2}], backgroundColor: C.muted, pointRadius: 6, pointStyle: 'rect' }
+  ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10, usePointStyle: true } }, tooltip: TT }, scales: { x: { ...AX, title:{display:true,text:'Volatility (%)',color:'#aaa',font:{size:10}} }, y: { ...AX, title:{display:true,text:'Return (%)',color:'#aaa',font:{size:10}} } } } });
+  new Chart('c3b', { type: 'bar', data: { labels: ['Equal Wt','KSE-100','Min Var','Max Sharpe'], datasets: [
+    { label: 'Return (%)', data: [19.2,15.3,16.8,24.6], backgroundColor: [C.goldA,C.goldA,C.goldA,'rgba(122,95,40,0.28)'], borderColor: [C.gold,C.muted,C.blue,C.gold], borderWidth: 1.5 },
+    { label: 'Volatility (%)', data: [22.4,18.7,14.2,15.8], backgroundColor: ['rgba(139,46,46,0.08)','rgba(139,46,46,0.08)',C.greenA,C.greenA], borderColor: [C.red,C.red,C.green,C.green], borderWidth: 1.5 },
+    { label: 'Sharpe', data: [0.89,0.71,0.98,1.34], type: 'line', borderColor: C.blue, backgroundColor:'transparent', borderWidth: 1.8, pointRadius: 4, pointBackgroundColor: C.blue, yAxisID: 'y1', tension: 0.2 }
+  ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10 } }, tooltip: TT }, scales: { y: AX, y1: { ...AX, position: 'right', grid:{drawOnChartArea:false}, min:0, max:1.7 } } } });
+}
+
+function doP4() {
+  new Chart('c4a', { type: 'bar', data: { labels: ['2020','2021','2022'], datasets: [
+    { label: 'ROE (%)', data: [14.4,14.7,12.7], backgroundColor: C.goldA, borderColor: C.gold, borderWidth: 1.5 },
+    { label: 'ROA (%)', data: [0.9,0.9,0.8], backgroundColor: C.greenA, borderColor: C.green, borderWidth: 1.5, yAxisID: 'y1' }
+  ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10 } }, tooltip: TT }, scales: { y: { ...AX, min:10, max:18 }, y1: { ...AX, position: 'right', grid:{drawOnChartArea:false}, min:0, max:2 } } } });
+  new Chart('c4b', { type: 'bar', data: { labels: ['ROE 2022','ROE 2021','Cost:Income','NI/Rev','P/B ×'], datasets: [
+    { label: 'HBL', data: [5.2,7.1,52.9,29.4,0.3], backgroundColor: C.goldA, borderColor: C.gold, borderWidth: 1.5 },
+    { label: 'MCB', data: [19.78,19.11,37.31,22.02,0.81], backgroundColor: C.blueA, borderColor: C.blue, borderWidth: 1.5 }
+  ]}, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10 } }, tooltip: TT }, scales: { x: AX, y: AX } } });
+}
+
+function doP5() {
+  new Chart('c5a', { type: 'line', data: { labels: ['2020','2021','2022','2023','2024'], datasets: [
+    { label: 'SCBP', data: [17,25.3,34.8,46.4,43.1], borderColor: C.gold, backgroundColor: C.goldA, fill: true, borderWidth: 2, pointRadius: 4, pointBackgroundColor: C.gold, tension: 0.35 },
+    { label: 'Meezan', data: [20.1,28.4,38.6,55.2,47], borderColor: C.green, backgroundColor:'transparent', borderWidth: 1.5, pointRadius: 3, tension: 0.35, borderDash:[4,3] },
+    { label: 'Allied', data: [14.8,18.2,20.9,24.6,26], borderColor: C.blue, backgroundColor:'transparent', borderWidth: 1.5, pointRadius: 3, tension: 0.35, borderDash:[4,3] },
+    { label: 'HBL', data: [12.1,13.8,16.2,19.4,16.7], borderColor: C.red, backgroundColor:'transparent', borderWidth: 1.5, pointRadius: 3, tension: 0.35, borderDash:[4,3] }
+  ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10 } }, tooltip: TT }, scales: { y: { ...AX, min:8, max:62 }, x: AX } } });
+  new Chart('c5b', { type: 'bar', data: { labels: ['2020','2021','2022','2023','2024'], datasets: [
+    { label: 'Net Interest Income (PKR Bn)', data: [28.14,42.6,60.1,78.4,93.51], backgroundColor: C.goldA, borderColor: C.gold, borderWidth: 1.5 },
+    { label: 'Profit Before Tax (PKR Bn)', data: [11.2,19.8,33.4,49.7,46.8], type: 'line', borderColor: C.green, backgroundColor:'transparent', borderWidth: 1.8, pointRadius: 3, pointBackgroundColor: C.green, tension: 0.35 }
+  ]}, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { color: '#888', boxWidth: 10 } }, tooltip: TT }, scales: { y: { ...AX, min:0 }, x: AX } } });
+}
+</script>
+</body>
+</html>
